@@ -5,7 +5,7 @@ import crypto from 'crypto';
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
 
 interface IUploadConfig {
-  driver: 'azure' | 'disk';
+  driver: 'disk' | 'azure';
   tmpFolder: string;
   uploadsFolder: string;
   multer: {

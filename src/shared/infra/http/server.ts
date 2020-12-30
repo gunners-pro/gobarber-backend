@@ -10,16 +10,16 @@ import rateLimiter from './middlewares/rateLimiter';
 
 import '@shared/infra/typeorm';
 
-import routes from './routes';
-
 import '@shared/container';
+
+import routes from './routes';
 
 const app = express();
 
-app.use(rateLimiter);
 app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
+app.use(rateLimiter);
 
 app.use(routes);
 
@@ -32,6 +32,8 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
       message: err.message,
     });
   }
+
+  console.error(err);
 
   return response.status(500).json({
     status: 'error',
